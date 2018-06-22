@@ -1,0 +1,35 @@
+{
+  "name": "yum-rocky",
+  "version": "0.1.0",
+  "description": "Parse your html text to be displayed in Telegram",
+  "main": "dist/lib/index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "babel lib/index.js -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:RogerVR1994/yum-rocky.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "chatbot",
+    "html",
+    "md",
+    "watson"
+  ],
+  "author": "Rogelio Ventura <rogeliovr94@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RogerVR1994/html-to-md/issues"
+  },
+  "homepage": "https://github.com/RogerVR1994/html-to-md#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {}
+}
