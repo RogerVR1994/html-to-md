@@ -1,6 +1,6 @@
 {
   "name": "yum-rocky",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parse your html text to be displayed in Telegram",
   "main": "dist/lib/index.js",
   "scripts": {
