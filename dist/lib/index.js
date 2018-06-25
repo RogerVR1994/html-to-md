@@ -1,8 +1,7 @@
 'use strict';
 
 var parseHtml = function parseHtml(message) {
-  return message.replace(/<li>/g, '<b>').replace(/<\/li>/g, '</b>').replace(/<p>/g, '').replace(/<\/p>/g, '\n').replace(/</g, '||').replace(/>/g, '¬¬').replace(/<(?:.|\n)*?>/gm, '').replace(/ class="a-popup"/g, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/\/>/g, '/">');
+  return message.replace(/<li>/g, '\n||b¬¬*****||/b¬¬').replace(/<strong>/g, '||b¬¬').replace(/<\/strong>/g, '||/b¬¬').replace(/<p>/g, '').replace(/<\/p>/g, '\n').replace(/<br>/g, '\n').replace(/<a/g, '||a').replace(/<\/a>/g, '||/a¬¬').replace().replace(/<(?:.|\n)*?>/gm, '').replace(/ class="a-popup"/g, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/\/>/g, '/">');
 };
-//message.replace(/<li>/g, '\n<strong>*</strong>').replace(/<b>|<strong>/g, '||b¬¬').replace(/<\/b>|<\/strong>/g, '||/b¬¬').replace(/<a/, '||a').replace(/<\/a/g, '||/a').replace(/<p>/g, '\n').replace(/">/g, '¬¬').replace(/<(?:.|\n)*?>/gm, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/ class="a-popup/g, '');
 
 module.exports.parseHtml = parseHtml;
