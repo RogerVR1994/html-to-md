@@ -10,7 +10,7 @@ var htmlToTelegram = function htmlToTelegram(message) {
 	var arrToRegEx = args.toString().replace(/,/g, '|');
 	var reg = new RegExp(arrToRegEx, "g");
 	message = parseHtml(message);
-	return message.replace(reg, '');
+	return parseHtml(message.replace(reg, ''));
 };
 
 module.exports.htmlToTelegram = htmlToTelegram;
