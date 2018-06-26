@@ -1,7 +1,7 @@
 'use strict';
 
 var parseHtml = function parseHtml(message) {
-	return message.replace(/<li>/g, '\n||b¬¬*||/b¬¬').replace(/<strong>|<b>/g, '||b¬¬').replace(/<\/b>/g, '||/b¬¬').replace(/<\/strong>/g, '||/b¬¬').replace(/<\/p>/g, '\n').replace(/<br>|<div|<hr>>/g, '\n').replace(/<a/g, '||a').replace(/<\/a>/g, '||/a¬¬').replace(/<(?:.|\n)*?>/gm, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/\/>/g, '/">');
+	return message.replace(/<li>/g, '\n||b¬¬*||/b¬¬').replace(/<strong>|<b>/g, '||b¬¬').replace(/<\/b>/g, '||/b¬¬').replace(/<\/strong>/g, '||/b¬¬').replace(/<\/p>/g, '\n').replace(/<br>|<div>|<hr>/g, '\n').replace(/<a/g, '||a').replace(/<\/a>/g, '||/a¬¬').replace(/<(?:.|\n)*?>/gm, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/\/>/g, '/">');
 };
 
 var htmlToTelegram = function htmlToTelegram(message) {
