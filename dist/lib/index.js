@@ -29,6 +29,9 @@ var parseHtml = function parseHtml(message) {
   * @param {Array} args - array of strings with the attributes inside
   * the bold, italic, links tags
   * @return {String} formatted string compatible with Telegram
+  * @example
+  * // returns <b>Hello, World!</b><a href="yourwbesite.com">click here</a>
+  * htmlToTelegram('<div><b class="your_class">Hello, World!</b></div><a href="yourwbesite.com">click here</a>', ['class="your_class"']);
 */
 var htmlToTelegram = function htmlToTelegram(message) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -39,4 +42,28 @@ var htmlToTelegram = function htmlToTelegram(message) {
   return parseHtml(message.replace(reg, ''));
 };
 
+/**
+ * createButtons() is a function that allows you to create a grid of buttons
+ * in Telegram using a parameter from Watson.
+ * @param {Array} options - Array of possible responses to be displayed in Telegram
+ * @returns {Object} template - Object with the correct Telegram format
+*/
+
+var createButtons = function createButtons(options) {
+  var template = {
+    "reply_markup": {
+      "inline_keyboard": []
+    }
+  };
+  for (var i = 0; i < Object.keys(options).length; i += 2) {
+    if (options[i + 1] !== undefined) {
+      template.reply_markup.inline_keyboard.push([{ "text": templates.cleanHtml(options[i]), "callback_data": templates.cleanHtml(options[i]) }, { "text": templates.cleanHtml(options[i + 1]), "callback_data": templates.cleanHtml(options[i + 1]) }]);
+    } else {
+      template.reply_markup.inline_keyboard.push([{ "text": templates.cleanHtml(options[i]), "callback_data": templates.cleanHtml(options[i]) }]);
+    }
+  }
+
+  return template;
+};
 module.exports.htmlToTelegram = htmlToTelegram;
+module.exports.createButtons = createButtons;
