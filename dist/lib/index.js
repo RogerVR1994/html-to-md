@@ -10,6 +10,8 @@
   * and a Telegram Chatbot.
 */
 
+var templates = require('messenger_templates');
+
 /**
   * parseHtml() cleans all HTML tags that are not supported by Telegram and 
   * will leave all valid tags untouched.
