@@ -53,6 +53,7 @@ var htmlToTelegram = function htmlToTelegram(message) {
 
 var createButtons = function createButtons(options) {
   var template = {
+    "parse_mode": "HTML",
     "reply_markup": {
       "inline_keyboard": []
     }
