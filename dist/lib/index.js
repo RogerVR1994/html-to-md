@@ -60,9 +60,9 @@ var createButtons = function createButtons(options) {
   };
   for (var i = 0; i < Object.keys(options).length; i += 2) {
     if (options[i + 1] !== undefined) {
-      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i]), "callback_data": templates.purgeHtml(options[i]) }, { "text": templates.purgeHtml(options[i + 1]), "callback_data": templates.purgeHtml(options[i + 1]) }]);
+      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }, { "text": templates.purgeHtml(options[i + 1]), "callback_data": templates.purgeHtml(options[i + 1]) }]);
     } else {
-      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i]), "callback_data": templates.purgeHtml(options[i]) }]);
+      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }]);
     }
   }
 
