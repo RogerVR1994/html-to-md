@@ -44,14 +44,7 @@ var htmlToTelegram = function htmlToTelegram(message) {
   return parseHtml(message.replace(reg, ''));
 };
 
-/**
- * createButtons() is a function that allows you to create a grid of buttons
- * in Telegram using a parameter from Watson.
- * @param {Array} options - Array of possible responses to be displayed in Telegram
- * @returns {Object} template - Object with the correct Telegram format
-*/
-
-var createButtons = function createButtons(options) {
+var doubleColumns = function doubleColumns(options) {
   var template = {
     "parse_mode": "HTML",
     "reply_markup": {
@@ -68,5 +61,44 @@ var createButtons = function createButtons(options) {
 
   return template;
 };
+
+var singleColumns = function singleColumns(options) {
+  var template = {
+    "parse_mode": "HTML",
+    "reply_markup": {
+      "inline_keyboard": []
+    }
+  };
+  for (var i = 0; i < Object.keys(options).length; i += 2) {
+    if (options[i + 1] !== undefined) {
+      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }, { "text": templates.purgeHtml(options[i + 1].slice(0, 59)), "callback_data": templates.purgeHtml(options[i + 1].slice(0, 59)) }]);
+    } else {
+      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }]);
+    }
+  }
+
+  return template;
+};
+
+/**
+ * createButtons() is a function that allows you to create a grid of buttons
+ * in Telegram using a parameter from Watson.
+ * @param {Array} options - Array of possible responses to be displayed in Telegram
+ * @returns {Object} template - Object with the correct Telegram format
+*/
+
+var createButtons = function createButtons(options) {
+  var single;
+  options.forEach(function (element, index) {
+    if (element.length > 50) {
+      single = true;
+    }
+  });
+  if (single) {
+    return singleColumns(options);
+  }
+  return doubleColumns(options);
+};
+
 module.exports.htmlToTelegram = htmlToTelegram;
 module.exports.createButtons = createButtons;
