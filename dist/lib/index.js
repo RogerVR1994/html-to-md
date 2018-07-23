@@ -44,6 +44,10 @@ var htmlToTelegram = function htmlToTelegram(message) {
   return parseHtml(message.replace(reg, ''));
 };
 
+var purgeHtml = function purgeHtml(message) {
+  return message.replace(/<(?:.|\n)*?>/gm, '');
+};
+
 var doubleColumns = function doubleColumns(options) {
   var template = {
     "parse_mode": "HTML",
@@ -98,3 +102,4 @@ var createButtons = function createButtons(options) {
 
 module.exports.htmlToTelegram = htmlToTelegram;
 module.exports.createButtons = createButtons;
+module.exports.purgeHtml = purgeHtml;
