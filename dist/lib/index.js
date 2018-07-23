@@ -90,7 +90,7 @@ var singleColumns = function singleColumns(options) {
 var createButtons = function createButtons(options) {
   var single;
   options.forEach(function (element, index) {
-    if (element.length > 50) {
+    if (element.length > 30) {
       single = true;
     }
   });
