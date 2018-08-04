@@ -19,7 +19,7 @@ var templates = require('messenger_templates');
   * @returns {String} formatted string compatible with Telegram
   */
 var parseHtml = function parseHtml(message) {
-  return message.replace(/<li>/g, '\n||b¬¬*||/b¬¬').replace(/<strong>|<b>/g, '||b¬¬').replace(/<\/b>/g, '||/b¬¬').replace(/<\/strong>/g, '||/b¬¬').replace(/<\/p>/g, '\n').replace(/<br>|<div>|<hr>/g, '\n').replace(/<a/g, '||a').replace(/<\/a>/g, '||/a¬¬').replace(/<(?:.|\n)*?>/gm, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/\/>/g, '/">');
+	return message.replace(/<li>/g, '\n||b¬¬*||/b¬¬').replace(/<strong>|<b>/g, '||b¬¬').replace(/<\/b>/g, '||/b¬¬').replace(/<\/strong>/g, '||/b¬¬').replace(/<\/p>/g, '\n').replace(/<br>|<div>|<hr>/g, '\n').replace(/<a/g, '||a').replace(/<\/a>/g, '||/a¬¬').replace(/<(?:.|\n)*?>/gm, '').replace(/\|\|/g, '<').replace(/¬¬/g, '>').replace(/\/>/g, '/">');
 };
 
 /**
@@ -36,48 +36,48 @@ var parseHtml = function parseHtml(message) {
   * htmlToTelegram('<div><b class="your_class">Hello, World!</b></div><a href="yourwbesite.com">click here</a>', ['class="your_class"']);
 */
 var htmlToTelegram = function htmlToTelegram(message) {
-  var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+	var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-  var arrToRegEx = args.toString().replace(/,/g, '|');
-  var reg = new RegExp(arrToRegEx, "g");
-  message = parseHtml(message);
-  return parseHtml(message.replace(reg, ''));
+	var arrToRegEx = args.toString().replace(/,/g, '|');
+	var reg = new RegExp(arrToRegEx, 'g');
+	message = parseHtml(message);
+	return parseHtml(message.replace(reg, ''));
 };
 
 var purgeHtml = function purgeHtml(message) {
-  return message.replace(/<(?:.|\n)*?>/gm, '');
+	return message.replace(/<(?:.|\n)*?>/gm, '');
 };
 
 var doubleColumns = function doubleColumns(options) {
-  var template = {
-    "parse_mode": "HTML",
-    "reply_markup": {
-      "inline_keyboard": []
-    }
-  };
-  for (var i = 0; i < Object.keys(options).length; i += 2) {
-    if (options[i + 1] !== undefined) {
-      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }, { "text": templates.purgeHtml(options[i + 1].slice(0, 59)), "callback_data": templates.purgeHtml(options[i + 1].slice(0, 59)) }]);
-    } else {
-      template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }]);
-    }
-  }
+	var template = {
+		'parse_mode': 'HTML',
+		'reply_markup': {
+			'inline_keyboard': []
+		}
+	};
+	for (var i = 0; i < Object.keys(options).length; i += 2) {
+		if (options[i + 1] !== undefined) {
+			template.reply_markup.inline_keyboard.push([{ 'text': templates.purgeHtml(options[i].slice(0, 59)), 'callback_data': templates.purgeHtml(options[i].slice(0, 59)) }, { 'text': templates.purgeHtml(options[i + 1].slice(0, 59)), 'callback_data': templates.purgeHtml(options[i + 1].slice(0, 59)) }]);
+		} else {
+			template.reply_markup.inline_keyboard.push([{ 'text': templates.purgeHtml(options[i].slice(0, 59)), 'callback_data': templates.purgeHtml(options[i].slice(0, 59)) }]);
+		}
+	}
 
-  return template;
+	return template;
 };
 
 var singleColumns = function singleColumns(options) {
-  var template = {
-    "parse_mode": "HTML",
-    "reply_markup": {
-      "inline_keyboard": []
-    }
-  };
-  for (var i = 0; i < Object.keys(options).length; i += 1) {
-    template.reply_markup.inline_keyboard.push([{ "text": templates.purgeHtml(options[i].slice(0, 59)), "callback_data": templates.purgeHtml(options[i].slice(0, 59)) }]);
-  }
+	var template = {
+		'parse_mode': 'HTML',
+		'reply_markup': {
+			'inline_keyboard': []
+		}
+	};
+	for (var i = 0; i < Object.keys(options).length; i += 1) {
+		template.reply_markup.inline_keyboard.push([{ 'text': templates.purgeHtml(options[i].slice(0, 59)), 'callback_data': templates.purgeHtml(options[i].slice(0, 59)) }]);
+	}
 
-  return template;
+	return template;
 };
 
 /**
@@ -88,16 +88,16 @@ var singleColumns = function singleColumns(options) {
 */
 
 var createButtons = function createButtons(options) {
-  var single;
-  options.forEach(function (element, index) {
-    if (element.length > 30) {
-      single = true;
-    }
-  });
-  if (single) {
-    return singleColumns(options);
-  }
-  return doubleColumns(options);
+	var single;
+	options.forEach(function (element, index) {
+		if (element.length > 30) {
+			single = true;
+		}
+	});
+	if (single) {
+		return singleColumns(options);
+	}
+	return doubleColumns(options);
 };
 
 module.exports.htmlToTelegram = htmlToTelegram;
